@@ -16,11 +16,12 @@
 
 import time
 
-from task_behavior_engine.branch import Sequencer
-from task_behavior_engine.decorator import Repeat
-from task_behavior_engine.tree import Blackboard
-from task_behavior_engine.tree import Node
-from task_behavior_engine.tree import NodeStatus
+import context
+from pylib.task_behavior_engine.branch import Sequencer
+from pylib.task_behavior_engine.decorator import Repeat
+from pylib.task_behavior_engine.tree import Blackboard
+from pylib.task_behavior_engine.tree import Node
+from pylib.task_behavior_engine.tree import NodeStatus
 
 
 class Count(Node):
@@ -78,17 +79,17 @@ class Count(Node):
 
 if __name__ == '__main__':
 
-    print "Running example 1 -- using a node"
+    print("Running example 1 -- using a node")
 
     count = Count(name="count_index")
     result = NodeStatus(NodeStatus.ACTIVE)
 
     while result == NodeStatus.ACTIVE:
         result = count.tick()
-        print result
+        print(result)
         time.sleep(0.1)
 
-    print "Running example 2 (10 times) -- using a decorator"
+    print("Running example 2 (10 times) -- using a decorator")
 
     count = Count(name="count_index")
     repeat = Repeat(name="repeat_count", child=count)
@@ -96,10 +97,10 @@ if __name__ == '__main__':
 
     for i in range(0, 10):
         result = repeat.tick()
-        print result
+        print(result)
         time.sleep(0.1)
 
-    print "Running example 3 -- using a behavior"
+    print("Running example 3 -- using a behavior")
 
     b = Blackboard()
 
@@ -121,5 +122,5 @@ if __name__ == '__main__':
 
     while result == NodeStatus.ACTIVE:
         result = finish_counts.tick()
-        print result
+        print(result)
         time.sleep(0.1)
